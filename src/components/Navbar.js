@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FaTwitter, FaFacebookF, FaYoutube, FaInstagram, FaTimes } from 'react-icons/fa';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import './Navbar.css';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -15,8 +16,8 @@ const Navbar = () => {
         </a>
       </div>
       <div className="navbar__center">
-        <a href="#" className="navbar__link">Our Vision</a>
-        <a href="#" className="navbar__link">Areas of Focus</a>
+        {/* <a href="#" className="navbar__link">Our Vision</a> */}
+        <Link to="/areas-of-focus" className="navbar__link">Areas of Focus</Link>
         <a href="#" className="navbar__link">Get Involved</a>
         <a href="#" className="navbar__link">Meet the Team</a>
       </div>
@@ -39,7 +40,9 @@ const Navbar = () => {
           </button>
           <div className="navbar__mobile-menu">
             <a href="#" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>Our Vision</a>
-            <a href="#" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>Areas of Focus</a>
+            <Link to="/areas-of-focus" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>
+              Areas of Focus
+            </Link>
             <a href="#" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>Get Involved</a>
             <a href="#" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>Meet the Team</a>
             <div className="navbar__mobile-socials">
