@@ -14,12 +14,12 @@
 }
 
 .contact-form__row .contact-form__field {
+  flex: 1;
   width: 50%;
   min-width: 0;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  flex: 1 1 0;
 }
 
 .contact-form__field {
@@ -53,18 +53,14 @@
   outline: none;
   resize: none;
   text-align: left;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .contact-form__field input:focus,
 .contact-form__field textarea:focus {
   border-color: #006ab5;
-}
-
-.contact-form__field input[type="text"],
-.contact-form__field textarea {
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
 }
 
 .contact-form__actions {
@@ -110,19 +106,30 @@
 }
 
 @media (max-width: 900px) {
+  .contact-form {
+    gap: 24px;
+  }
+  
   .contact-form__row {
     flex-direction: column;
-    gap: 12px;
+    gap: 20px;
   }
+  
   .contact-form__row .contact-form__field {
     width: 100%;
     min-width: 0;
     box-sizing: border-box;
   }
+  
+  .contact-form__field {
+    gap: 12px;
+  }
+  
   .contact-form__field input,
   .contact-form__field textarea {
     font-size: 1rem;
   }
+  
   .contact-form__submit {
     font-size: 1rem;
     padding: 10px 24px;
@@ -131,15 +138,25 @@
 
 @media (max-width: 600px) {
   .contact-form {
-    gap: 12px;
+    gap: 28px;
     padding-left: 8px;
     padding-right: 8px;
     width: 100%;
     box-sizing: border-box;
   }
+  
+  .contact-form__row {
+    gap: 24px;
+  }
+  
+  .contact-form__field {
+    gap: 14px;
+  }
+  
   .contact-form__field label {
     font-size: 1.08rem;
   }
+  
   .contact-form__field input,
   .contact-form__field textarea {
     font-size: 1.08rem;
@@ -147,10 +164,12 @@
     height: 48px;
     min-height: 48px;
   }
+  
   .contact-form__field textarea {
     min-height: 96px;
     height: 96px;
   }
+  
   .contact-form__error {
     font-size: 1.01rem;
   }
