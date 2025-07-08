@@ -28,7 +28,7 @@ const Navbar = () => {
           <a href="#" aria-label="YouTube"><FaYoutube /></a>
           <a href="#" aria-label="Instagram"><FaInstagram /></a>
         </div>
-        <button className="navbar__contact">Contact us <span className="arrow">→</span></button>
+        <Link to="/contact" className="navbar__contact">Contact us <span className="arrow">→</span></Link>
         <button className="navbar__hamburger" onClick={() => setMobileMenuOpen(true)} aria-label="Open menu">
           <RxHamburgerMenu />
         </button>
@@ -39,7 +39,6 @@ const Navbar = () => {
             <FaTimes />
           </button>
           <div className="navbar__mobile-menu">
-            <a href="#" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>Our Vision</a>
             <Link to="/areas-of-focus" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>
               Areas of Focus
             </Link>
@@ -51,7 +50,9 @@ const Navbar = () => {
               <a href="#" aria-label="YouTube"><FaYoutube /></a>
               <a href="#" aria-label="Instagram"><FaInstagram /></a>
             </div>
-            <button className="navbar__contact navbar__contact--mobile">Contact us <span className="arrow">→</span></button>
+            <Link to="/contact" className="navbar__contact navbar__contact--mobile" onClick={() => setMobileMenuOpen(false)}>
+              Contact us <span className="arrow">→</span>
+            </Link>
           </div>
         </div>
       )}
