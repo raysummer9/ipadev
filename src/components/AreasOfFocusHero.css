@@ -1,6 +1,6 @@
-.areas-hero {
+.areas-hero-section {
+  width: 100%;
   position: relative;
-  width: 100vw;
   min-height: 340px;
   max-height: 60vh;
   overflow: hidden;
@@ -54,7 +54,7 @@
 }
 
 @media (max-width: 900px) {
-  .areas-hero {
+  .areas-hero-section {
     min-height: 220px;
     max-height: 40vh;
   }
@@ -82,7 +82,7 @@
 }
 
 @media (max-width: 600px) {
-  .areas-hero {
+  .areas-hero-section {
     min-height: 180px;
     max-height: none;
     height: 50vh;

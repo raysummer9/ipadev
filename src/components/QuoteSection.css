@@ -3,7 +3,7 @@
   color: #fff;
   border-radius: 32px;
   padding: 48px 24px 64px 24px;
-  margin: 40px auto;
+  margin: 40px auto 96px auto;
   max-width: 1200px;
   font-family: 'Questrial', Arial, sans-serif;
   text-align: center;
@@ -101,7 +101,10 @@
 
 @media (max-width: 600px) {
   .quote-section {
-    padding: 24px 2vw 36px 2vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-top: 24px;
+    padding-bottom: 36px;
     border-radius: 18px;
   }
   .quote-section__title {

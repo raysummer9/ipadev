@@ -18,7 +18,7 @@ const Navbar = () => {
       <div className="navbar__center">
         {/* <a href="#" className="navbar__link">Our Vision</a> */}
         <Link to="/areas-of-focus" className="navbar__link">Areas of Focus</Link>
-        <a href="#" className="navbar__link">Get Involved</a>
+        <Link to="/get-involved" className="navbar__link">Get Involved</Link>
         <a href="#" className="navbar__link">Meet the Team</a>
       </div>
       <div className="navbar__right">
@@ -42,7 +42,9 @@ const Navbar = () => {
             <Link to="/areas-of-focus" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>
               Areas of Focus
             </Link>
-            <a href="#" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>Get Involved</a>
+            <Link to="/get-involved" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>
+              Get Involved
+            </Link>
             <a href="#" className="navbar__link" onClick={() => setMobileMenuOpen(false)}>Meet the Team</a>
             <div className="navbar__mobile-socials">
               <a href="#" aria-label="Twitter"><FaTwitter /></a>
