@@ -68,16 +68,22 @@
     gap: 12px;
   }
   .contact-info-panel__card {
-    font-size: 0.98rem;
-    padding: 14px 8px;
+    font-size: 1.12rem;
+    padding: 18px 12px;
     width: 100%;
     min-width: 0;
     border-radius: 7px;
+    text-align: center;
+    align-items: center;
   }
   .contact-info-panel__icon {
-    font-size: 1rem;
+    font-size: 1.3rem;
+  }
+  .contact-info-panel__socials {
+    justify-content: center;
+    width: 100%;
   }
   .contact-info-panel__socials a {
-    font-size: 1.1rem;
+    font-size: 1.18rem;
   }
 } 
