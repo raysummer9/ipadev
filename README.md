@@ -1,70 +1,25 @@
-# Getting Started with Create React App
+# Inclusive Pathway Development Initiative (IPADEV) Website
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is the official website for the Inclusive Pathway Development Initiative (IPADEV), a non-profit organization dedicated to promoting equal opportunities, social justice, and community empowerment in Nigeria.
 
-## Available Scripts
+## Project Overview
+The website serves as a digital platform to showcase IPADEV’s mission, vision, core values, areas of focus, and ways for individuals and organizations to get involved. It provides information about the organization’s work, success stories, and offers visitors a way to contact or subscribe for updates.
 
-In the project directory, you can run:
+## Key Features
+- **Modern, Responsive Design:** Optimized for both desktop and mobile devices, ensuring accessibility and usability for all visitors.
+- **Hero and About Sections:** Highlight IPADEV’s mission, vision, and core values with engaging visuals and clear messaging.
+- **Areas of Focus:** Detailed information about the organization’s strategic objectives and focus areas.
+- **Get Involved Page:** Outlines various ways supporters can participate, including volunteering, partnership, and donations.
+- **Contact Form:** Allows visitors to reach out directly to the IPADEV team for inquiries, feedback, or collaboration opportunities.
+- **Newsletter Signup:** Enables users to subscribe for updates and success stories via email.
+- **Footer with Social Links:** Provides quick access to IPADEV’s social media profiles and essential navigation links.
+- **Optimized Images:** All images are compressed for fast loading and improved performance.
 
-### `npm start`
+## Technologies Used
+- **React:** For building the user interface and managing component-based architecture.
+- **CSS (custom, responsive):** For styling and layout, with a focus on mobile-first design.
+- **PHP:** Used for backend form handling (contact and newsletter forms) via a simple mail script compatible with cPanel hosting.
+- **Sharp:** Utilized for automated image compression to enhance site speed.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Purpose
+The IPADEV website is designed to inform, engage, and inspire action among stakeholders, partners, and the general public. It reflects the organization’s commitment to transparency, inclusivity, and positive social impact.
