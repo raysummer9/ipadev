@@ -27,6 +27,8 @@ const ContactForm = () => {
   const [errors, setErrors] = useState(initialErrors);
   const [touched, setTouched] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [serverResponse, setServerResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,18 +55,39 @@ const ContactForm = () => {
     setErrors(validate());
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setTouched({ firstName: true, lastName: true, email: true, phone: true, subject: true, message: true });
     const validationErrors = validate();
     setErrors(validationErrors);
     setSubmitted(true);
     if (Object.values(validationErrors).every((v) => !v)) {
-      // Submit form (e.g., send to API)
-      alert('Form submitted!');
-      setValues(initialState);
-      setTouched({});
-      setSubmitted(false);
+      setLoading(true);
+      setServerResponse(null);
+      try {
+        const formData = new FormData();
+        formData.append('name', values.firstName + ' ' + values.lastName);
+        formData.append('email', values.email);
+        formData.append('phone', values.phone);
+        formData.append('message', `Subject: ${values.subject}\n${values.message}`);
+        const res = await fetch('/sendmail.php', {
+          method: 'POST',
+          body: formData,
+        });
+        const data = await res.json();
+        if (data.success) {
+          setServerResponse({ type: 'success', message: data.message });
+          setValues(initialState);
+          setTouched({});
+          setSubmitted(false);
+        } else {
+          setServerResponse({ type: 'error', message: data.message || 'Failed to send message.' });
+        }
+      } catch (err) {
+        setServerResponse({ type: 'error', message: 'Failed to send message. Please try again later.' });
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -171,8 +194,15 @@ const ContactForm = () => {
         )}
       </div>
       <div className="contact-form__actions">
-        <button type="submit" className="contact-form__submit">Send Your Message</button>
+        <button type="submit" className="contact-form__submit" disabled={loading}>
+          {loading ? 'Sending...' : 'Send Your Message'}
+        </button>
       </div>
+      {serverResponse && (
+        <div className={`contact-form__response contact-form__response--${serverResponse.type}`}>
+          {serverResponse.message}
+        </div>
+      )}
       {submitted && Object.values(errors).some((v) => v) && (
         <div className="contact-form__error contact-form__error--form">Please fix the errors above and try again.</div>
       )}
