@@ -1,6 +1,20 @@
 <?php
 header('Content-Type: application/json');
 
+// Load Composer's autoloader for PHPMailer and Dotenv
+require __DIR__ . '/phpmailer/PHPMailer.php';
+require __DIR__ . '/phpmailer/SMTP.php';
+require __DIR__ . '/phpmailer/Exception.php';
+require __DIR__ . '/vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use Dotenv\Dotenv;
+
+// Load .env
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 // Only allow POST requests
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
@@ -21,16 +35,28 @@ if (empty($name) || empty($email) || empty($message)) {
     exit;
 }
 
-// Email settings
-$to = 'contact@ipadev.ng';
-$subject = 'New Contact Form Submission';
-$body = "Name: $name\nEmail: $email\nPhone: $phone\nMessage:\n$message";
-$headers = "From: $email\r\nReply-To: $email\r\n";
+$mail = new PHPMailer(true);
+try {
+    // SMTP settings from .env
+    $mail->isSMTP();
+    $mail->Host = getenv('SMTP_HOST');
+    $mail->SMTPAuth = true;
+    $mail->Username = getenv('SMTP_USER');
+    $mail->Password = getenv('SMTP_PASS');
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+    $mail->Port = getenv('SMTP_PORT');
 
-// Send email
-if (mail($to, $subject, $body, $headers)) {
+    $mail->setFrom(getenv('SMTP_USER'), 'IPADEV Website');
+    $mail->addAddress(getenv('SMTP_USER'));
+    $mail->addReplyTo($email, $name);
+
+    $mail->isHTML(false);
+    $mail->Subject = 'New Contact Form Submission';
+    $mail->Body = "Name: $name\nEmail: $email\nPhone: $phone\nMessage:\n$message";
+
+    $mail->send();
     echo json_encode(['success' => true, 'message' => 'Thank you for contacting us! We will get back to you soon.']);
-} else {
+} catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'message' => 'Failed to send email. Please try again later.']);
+    echo json_encode(['success' => false, 'message' => 'Failed to send email. Mailer Error: ' . $mail->ErrorInfo]);
 } 
