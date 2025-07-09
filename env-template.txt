@@ -1,0 +1,6 @@
+# Copy this file to .env and fill in your actual values
+# SMTP Configuration
+SMTP_HOST=smtp.gmail.com
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password
+SMTP_PORT=465 

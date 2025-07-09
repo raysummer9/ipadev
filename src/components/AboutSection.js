@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './AboutSection.css';
 
 const AboutSection = () => (
@@ -14,7 +15,7 @@ const AboutSection = () => (
           Our vision is a just and inclusive society where every individual, regardless of gender, background, or status, has equal opportunities to thrive and contribute to sustainable development.
  
         </p>
-        <button className="about-section__btn">Learn More</button>
+        <Link to="/areas-of-focus" className="about-section__btn">Learn More</Link>
       </div>
       <div className="about-section__img-wrap">
         <img src={process.env.PUBLIC_URL + '/img/card-img1.webp'} alt="Mission" className="about-section__img" />
@@ -40,7 +41,7 @@ const AboutSection = () => (
           <li><strong>Accountability:</strong> Holding ourselves and others accountable for actions and outcomes.</li>
           <li><strong>Respect:</strong> Valuing diverse perspectives, experiences, and voices.</li>
         </ul>
-        <button className="about-section__vision-btn">Learn More</button>
+        <Link to="/areas-of-focus" className="about-section__vision-btn">Learn More</Link>
       </div>
     </div>
   </section>
