@@ -13,12 +13,12 @@ const Hero = () => (
       </p>
     </div>
     <div className="hero__visual-row hero__visual-row--trio hero__visual-row--hide-mobile">
-      <HeroCard image={process.env.PUBLIC_URL + '/img/card-img1.webp'} alt="Side Card 1" className="hero-card--side-small hero-card--side-left" />
-      <HeroCard image={process.env.PUBLIC_URL + '/img/card-img4.webp'} alt="Main Hero" className="hero-card--large hero-card--centerpiece" />
-      <HeroCard image={process.env.PUBLIC_URL + '/img/card-img2.webp'} alt="Side Card 2" className="hero-card--side-small hero-card--side-right" />
+      <HeroCard image={process.env.PUBLIC_URL + '/img/img1.webp'} alt="Side Card 1" className="hero-card--side-small hero-card--side-left" />
+      <HeroCard image={process.env.PUBLIC_URL + '/img/img4.webp'} alt="Main Hero" className="hero-card--large hero-card--centerpiece" />
+      <HeroCard image={process.env.PUBLIC_URL + '/img/img2.webp'} alt="Side Card 2" className="hero-card--side-small hero-card--side-right" />
     </div>
     <div className="hero__visual-row hero__visual-row--mobile-main-only">
-      <HeroCard image={process.env.PUBLIC_URL + '/img/card-img4.webp'} alt="Main Hero" className="hero-card--large hero-card--centerpiece" />
+      <HeroCard image={process.env.PUBLIC_URL + '/img/img4.webp'} alt="Main Hero" className="hero-card--large hero-card--centerpiece" />
     </div>
   </section>
 );

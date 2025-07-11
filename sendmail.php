@@ -17,8 +17,8 @@ error_log('Files: ' . implode(', ', scandir(__DIR__)));
 
 // Load .env with error handling
 try {
-    $dotenv = Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 } catch (Exception $e) {
     error_log('Dotenv error: ' . $e->getMessage());
 }

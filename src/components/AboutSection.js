@@ -18,15 +18,15 @@ const AboutSection = () => (
         <Link to="/areas-of-focus" className="about-section__btn">Learn More</Link>
       </div>
       <div className="about-section__img-wrap">
-        <img src={process.env.PUBLIC_URL + '/img/card-img1.webp'} alt="Mission" className="about-section__img" />
+        <img src={process.env.PUBLIC_URL + '/img/img5.webp'} alt="Mission" className="about-section__img" />
       </div>
     </div>
     {/* Core Values Section (new layout) */}
     <div className="about-section__block about-section__block--vision-sample">
       <div className="about-section__img-grid-collage about-section__img-grid-collage--vision">
-        <img src={process.env.PUBLIC_URL + '/img/card-img2.webp'} alt="Core 1" className="about-section__img about-section__img--grid-main" />
-        <img src={process.env.PUBLIC_URL + '/img/card-img3.webp'} alt="Core 2" className="about-section__img about-section__img--grid-top" />
-        <img src={process.env.PUBLIC_URL + '/img/card-img4.webp'} alt="Core 3" className="about-section__img about-section__img--grid-bottom" />
+        <img src={process.env.PUBLIC_URL + '/img/img3.webp'} alt="Core 1" className="about-section__img about-section__img--grid-main" />
+        <img src={process.env.PUBLIC_URL + '/img/img1.webp'} alt="Core 2" className="about-section__img about-section__img--grid-top" />
+        <img src={process.env.PUBLIC_URL + '/img/img2.webp'} alt="Core 3" className="about-section__img about-section__img--grid-bottom" />
       </div>
       <div className="about-section__vision-content">
         <div className="about-section__accent about-section__accent--yellow"></div>
