@@ -89,25 +89,36 @@
 
 @media (max-width: 600px) {
   .areas-hero-section {
-    min-height: 180px;
+    min-height: 320px;
     max-height: none;
     padding: 0;
     margin-bottom: 18px;
   }
   .areas-hero__bg,
   .areas-hero__overlay {
-    min-height: 180px;
+    min-height: 320px;
     max-height: none;
   }
+  .areas-hero__overlay {
+    padding: 40px 4vw 40px 4vw;
+    align-items: center;
+    justify-content: center;
+  }
+  .areas-hero__overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
   .areas-hero__title {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     margin-bottom: 12px;
+    line-height: 1.3;
   }
   .areas-hero__desc {
-    font-size: 1.08rem;
+    font-size: 0.95rem;
     max-width: 98vw;
-  }
-  .areas-hero__overlay {
-    padding: 32px 4vw 32px 4vw;
+    line-height: 1.4;
   }
 } 
