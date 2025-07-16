@@ -9,6 +9,7 @@ The website serves as a digital platform to showcase IPADEV’s mission, vision,
 - **Modern, Responsive Design:** Optimized for both desktop and mobile devices, ensuring accessibility and usability for all visitors.
 - **Hero and About Sections:** Highlight IPADEV’s mission, vision, and core values with engaging visuals and clear messaging.
 - **Areas of Focus:** Detailed information about the organization’s strategic objectives and focus areas.
+- **Team Page:** Showcases the Board of Trustees and Executive Director with comprehensive profiles, photos, and organizational vision.
 - **Get Involved Page:** Outlines various ways supporters can participate, including volunteering, partnership, and donations.
 - **Contact Form:** Allows visitors to reach out directly to the IPADEV team for inquiries, feedback, or collaboration opportunities.
 - **Newsletter Signup:** Enables users to subscribe for updates and success stories via email.

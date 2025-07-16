@@ -8,6 +8,7 @@ import ContactPage from './components/ContactPage';
 import NewsletterSection from './components/NewsletterSection';
 import Footer from './components/Footer';
 import GetInvolvedPage from './components/GetInvolvedPage';
+import TeamPage from './components/TeamPage';
 import './App.css';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/areas-of-focus" element={<AreasOfFocusPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/get-involved" element={<GetInvolvedPage />} />
+          <Route path="/team" element={<TeamPage />} />
         </Routes>
         <NewsletterSection />
         <Footer />

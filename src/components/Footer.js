@@ -14,7 +14,7 @@ const Footer = () => (
         <Link to="/" className="footer__menu-link">Home</Link>
         <Link to="/areas-of-focus" className="footer__menu-link">Areas of Focus</Link>
         <Link to="/get-involved" className="footer__menu-link">Get Involved</Link>
-        <a href="#" className="footer__menu-link">Meet the Team</a>
+        <Link to="/team" className="footer__menu-link">Meet the Team</Link>
         <Link to="/contact" className="footer__menu-link">Contact</Link>
       </nav>
     </div>
