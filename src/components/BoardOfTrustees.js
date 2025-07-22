@@ -1,8 +1,9 @@
 import React from 'react';
 import './BoardOfTrustees.css';
 
-const BoardOfTrustees = () => {
-  const boardMembers = [
+const BoardOfTrustees = ({ boardMembers = [] }) => {
+  // Fallback data if no board members are provided
+  const defaultBoardMembers = [
     {
       name: 'Adesina Fagbenro-Byron',
       role: 'Board Member',
@@ -35,12 +36,14 @@ const BoardOfTrustees = () => {
     }
   ];
 
+  const members = boardMembers.length > 0 ? boardMembers : defaultBoardMembers;
+
   return (
     <section className="board-trustees">
       <div className="board-trustees__content">
         <h2 className="board-trustees__heading">Board of Trustees</h2>
         <div className="board-trustees__grid">
-          {boardMembers.map((member, index) => (
+          {members.map((member, index) => (
             <div className="board-trustees__member" key={index}>
               <div className="board-trustees__photo-container">
                 <img 
