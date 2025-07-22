@@ -12,11 +12,13 @@ const TeamPage = () => {
   useEffect(() => {
     const fetchTeamData = async () => {
       try {
+        console.log('Fetching team data...');
         const data = await apiService.getTeam();
+        console.log('Team data received:', data);
         setTeamData(data);
       } catch (err) {
-        setError('Failed to load team data');
         console.error('Error fetching team data:', err);
+        setError('Failed to load team data');
       } finally {
         setLoading(false);
       }

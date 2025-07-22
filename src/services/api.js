@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://ipadev.ng/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://www.ipadev.ng/api';
 
 class ApiService {
   async fetchData(endpoint) {

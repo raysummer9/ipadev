@@ -10,27 +10,48 @@ class Plugin extends PluginBase
             'name'        => 'IPADEV API',
             'description' => 'API endpoints for IPADEV website content',
             'author'      => 'IPADEV Team',
-            'icon'        => 'icon-leaf'
+            'icon'        => 'icon-leaf',
+            'homepage'    => 'https://ipadev.ng'
         ];
     }
 
-    public function registerComponents()
+    public function register()
+    {
+        // Register routes when the plugin is loaded
+        $this->registerRoutes();
+    }
+
+    public function registerNavigation()
     {
         return [
-            'Ipadev\Api\Components\ContentApi' => 'contentApi'
+            'ipadev' => [
+                'label' => 'IPADEV',
+                'url' => \Backend::url('ipadev/api/teammembers'),
+                'icon' => 'icon-leaf',
+                'permissions' => ['ipadev.api.*'],
+                'order' => 500,
+                'sideMenu' => [
+                    'teammembers' => [
+                        'label' => 'Team Members',
+                        'icon' => 'icon-users',
+                        'url' => \Backend::url('ipadev/api/teammembers'),
+                    ],
+                ]
+            ]
         ];
     }
 
-    public function registerApiEndpoints()
+    protected function registerRoutes()
     {
-        return [
-            'GET /api/hero' => 'Ipadev\Api\Controllers\Api@getHero',
-            'GET /api/about' => 'Ipadev\Api\Controllers\Api@getAbout',
-            'GET /api/team' => 'Ipadev\Api\Controllers\Api@getTeam',
-            'GET /api/areas-of-focus' => 'Ipadev\Api\Controllers\Api@getAreasOfFocus',
-            'GET /api/contact' => 'Ipadev\Api\Controllers\Api@getContact',
-            'POST /api/contact' => 'Ipadev\Api\Controllers\Api@submitContact',
-            'POST /api/newsletter' => 'Ipadev\Api\Controllers\Api@subscribeNewsletter'
-        ];
+        // Register API routes
+        \Route::group(['prefix' => 'api'], function () {
+            \Route::get('hero', 'Ipadev\Api\Controllers\Api@getHero');
+            \Route::get('about', 'Ipadev\Api\Controllers\Api@getAbout');
+            \Route::get('team', 'Ipadev\Api\Controllers\Api@getTeam');
+            \Route::get('areas-of-focus', 'Ipadev\Api\Controllers\Api@getAreasOfFocus');
+            \Route::get('contact', 'Ipadev\Api\Controllers\Api@getContact');
+            \Route::post('contact', 'Ipadev\Api\Controllers\Api@submitContact');
+            \Route::post('newsletter', 'Ipadev\Api\Controllers\Api@subscribeNewsletter');
+        });
     }
 } 

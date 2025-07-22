@@ -1,7 +1,9 @@
 # Enable URL rewriting
 RewriteEngine On
 
-# Handle React Router - redirect all requests to index.html except for existing files/directories
+# Exclude admin routes from React Router
+RewriteCond %{REQUEST_URI} !^/admin
+RewriteCond %{REQUEST_URI} !^/api
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.html [QSA,L]

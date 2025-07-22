@@ -2,9 +2,27 @@
 
 use Backend\Classes\Controller;
 use Response;
+use Input;
+use Request;
 
 class Api extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        
+        // Add CORS headers
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+        header('Access-Control-Allow-Headers: Content-Type');
+        
+        // Handle preflight requests
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit();
+        }
+    }
+
     public function getHero()
     {
         $hero = [
@@ -39,47 +57,28 @@ class Api extends Controller
 
     public function getTeam()
     {
+        // Get executive director
+        $executiveDirector = \Ipadev\Api\Models\TeamMember::active()->executiveDirector()->first();
+        
+        // Get board members
+        $boardMembers = \Ipadev\Api\Models\TeamMember::active()->boardMembers()->orderBy('sort_order')->get();
+        
         $team = [
-            'executive_director' => [
-                'name' => 'Dr. Margaret Fagboyo',
-                'title' => 'Executive Director',
-                'bio' => 'With 24 years of experience in international development and multilateral partnerships, Dr Fagboyo is a seasoned development practitioner...',
-                'photo' => '/img/dr-margaret-fagboyo.jpg',
-                'vision' => 'A just and inclusive society where every individual, regardless of gender, background, or status, has equal opportunities to thrive and contribute to sustainable development.',
-                'message' => 'Welcome to IPADEV. We are committed to building bridges between communities, policymakers, and development practitioners...'
-            ],
-            'board_members' => [
-                [
-                    'name' => 'Adesina Fagbenro-Byron',
-                    'role' => 'Board Member',
-                    'photo' => '/img/dr-adesina.jpeg'
-                ],
-                [
-                    'name' => 'Abiodun Essiet',
-                    'role' => 'Board Member',
-                    'photo' => '/img/essiet.jpeg'
-                ],
-                [
-                    'name' => 'Olamide Juliana Falana',
-                    'role' => 'Board Member',
-                    'photo' => '/img/olamide-falana.jpeg'
-                ],
-                [
-                    'name' => 'Olubunmi Adelugba',
-                    'role' => 'Board Member',
-                    'photo' => '/img/adelugba.jpeg'
-                ],
-                [
-                    'name' => 'Dominion Dolapo Fagboyo',
-                    'role' => 'Board Member',
-                    'photo' => '/img/dominion.jpeg'
-                ],
-                [
-                    'name' => 'Samuel Ruth Chadi',
-                    'role' => 'Secretary',
-                    'photo' => '/img/ruth.jpeg'
-                ]
-            ]
+            'executive_director' => $executiveDirector ? [
+                'name' => $executiveDirector->name,
+                'title' => $executiveDirector->role,
+                'bio' => $executiveDirector->bio,
+                'photo' => $executiveDirector->photo_file ? $executiveDirector->photo_file->getPath() : '/img/placeholder-avatar.svg',
+                'vision' => $executiveDirector->vision,
+                'message' => $executiveDirector->message
+            ] : null,
+            'board_members' => $boardMembers->map(function($member) {
+                return [
+                    'name' => $member->name,
+                    'role' => $member->role,
+                    'photo' => $member->photo_file ? $member->photo_file->getPath() : '/img/placeholder-avatar.svg'
+                ];
+            })->toArray()
         ];
 
         return Response::json($team);
@@ -137,7 +136,7 @@ class Api extends Controller
     public function submitContact()
     {
         // Handle contact form submission
-        $data = input();
+        $data = Request::all();
         
         // Validate and process the data
         // Send email notification
@@ -149,7 +148,7 @@ class Api extends Controller
     public function subscribeNewsletter()
     {
         // Handle newsletter subscription
-        $email = input('email');
+        $email = Request::input('email');
         
         // Validate email
         // Add to newsletter list
