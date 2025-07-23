@@ -68,7 +68,7 @@ class Api extends Controller
                 'name' => $executiveDirector->name,
                 'title' => $executiveDirector->role,
                 'bio' => $executiveDirector->bio,
-                'photo' => $executiveDirector->photo_file ? $executiveDirector->photo_file->getPath() : '/img/placeholder-avatar.svg',
+                'photo' => $executiveDirector->photo_file ? 'https://admin.ipadev.ng' . $executiveDirector->photo_file->getPath() : '/img/placeholder-avatar.svg',
                 'vision' => $executiveDirector->vision,
                 'message' => $executiveDirector->message
             ] : null,
@@ -76,7 +76,7 @@ class Api extends Controller
                 return [
                     'name' => $member->name,
                     'role' => $member->role,
-                    'photo' => $member->photo_file ? $member->photo_file->getPath() : '/img/placeholder-avatar.svg'
+                    'photo' => $member->photo_file ? 'https://admin.ipadev.ng' . $member->photo_file->getPath() : '/img/placeholder-avatar.svg'
                 ];
             })->toArray()
         ];

@@ -22,6 +22,10 @@ fields:
         mode: image
         imageWidth: 200
         imageHeight: 200
+        useCaption: false
+        thumbOptions:
+            mode: crop
+            extension: auto
 
     bio:
         label: Bio
