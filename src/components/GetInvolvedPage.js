@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHandshake, FaUsers, FaHandHoldingHeart, FaBullhorn, FaGraduationCap, FaHandsHelping, FaArrowRight } from 'react-icons/fa';
+import { FaHandshake, FaUsers, FaHandHoldingHeart, FaBullhorn, FaGraduationCap, FaHandsHelping } from 'react-icons/fa';
 import './GetInvolvedPage.css';
 
 const GetInvolvedPage = () => {

@@ -3,7 +3,6 @@ import './NewsletterSection.css';
 
 const NewsletterSection = () => {
   const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [serverResponse, setServerResponse] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -32,7 +31,6 @@ const NewsletterSection = () => {
       const data = await res.json();
       if (data.success) {
         setServerResponse({ type: 'success', message: data.message });
-        setSubmitted(true);
         setEmail('');
       } else {
         setServerResponse({ type: 'error', message: data.message || 'Failed to subscribe.' });
@@ -41,7 +39,6 @@ const NewsletterSection = () => {
       setServerResponse({ type: 'error', message: 'Failed to subscribe. Please try again later.' });
     } finally {
       setLoading(false);
-      setTimeout(() => setSubmitted(false), 3000);
     }
   };
 
