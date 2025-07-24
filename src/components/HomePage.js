@@ -36,7 +36,7 @@ const HomePage = () => {
     }, 3000);
 
     return () => clearTimeout(forceReadyTimer);
-  }, []);
+  }, [heroDataReady, aboutDataReady]);
 
   return (
     <>

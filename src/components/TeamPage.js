@@ -6,7 +6,6 @@ import './TeamPage.css';
 
 const TeamPage = () => {
   const [teamData, setTeamData] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [wpMembers, setWpMembers] = useState([]);
   const [wpExecutiveDirector, setWpExecutiveDirector] = useState(null);
@@ -23,8 +22,6 @@ const TeamPage = () => {
         console.error('Error fetching team data:', err);
         // Don't set error, just log it - we'll use fallback data
         setError(null); // Clear any previous errors
-      } finally {
-        setLoading(false);
       }
     };
 
@@ -101,62 +98,38 @@ const TeamPage = () => {
                 }
               }
               
-              return { 
-                ...executiveData[0], 
-                acf: acfFields,
-                _embedded: featuredImage ? { 'wp:featuredmedia': [featuredImage] } : acfData._embedded
+              return {
+                ...acfData,
+                featuredImage
               };
             }
-          } catch (err) {
-            console.log(`Could not fetch ACF for executive director ${executiveData[0].id}:`, err);
+          } catch (acfErr) {
+            console.error(`Error fetching ACF data for executive director ${executiveData[0].id}:`, acfErr);
           }
           return executiveData[0];
         })() : null;
         
-        // Try to fetch ACF fields for board members
-        const boardMembersWithACF = await Promise.all(boardData.map(async (member) => {
-          try {
-            const acfResponse = await fetch(`https://admin.ipadev.ng/wp-json/wp/v2/board_members/${member.id}?acf=1`);
-            if (acfResponse.ok) {
-              const acfData = await acfResponse.json();
-              console.log(`ACF data for board member ${member.id}:`, acfData.acf);
-              
-              // Check if ACF fields are in meta data
-              const acfFields = acfData.meta || acfData.acf || [];
-              console.log(`ACF fields found for board member ${member.id}:`, acfFields);
-              
-              return { ...member, acf: acfFields };
-            }
-          } catch (err) {
-            console.log(`Could not fetch ACF for board member ${member.id}:`, err);
-          }
-          return member;
-        }));
-        
-        console.log('Executive director with ACF:', executiveWithACF);
-        console.log('Board members with ACF:', boardMembersWithACF);
-        
-        setWpMembers(boardMembersWithACF);
         setWpExecutiveDirector(executiveWithACF);
-        setIsDataReady(true); // Set data ready after fetching WordPress data
+        setWpMembers(boardData);
+        
       } catch (err) {
         console.error('Error fetching WordPress data:', err);
-        console.error('Error details:', err.message);
-        // Don't set error here, just log it - we'll use fallback data
-        setIsDataReady(true); // Still set data ready even if there's an error
+        setWpMembers([]);
+        setWpExecutiveDirector(null);
+      } finally {
+        setIsDataReady(true);
       }
     };
 
-    // Fetch both data sources
-    Promise.all([fetchTeamData(), fetchWordPressMembers()]);
+    fetchTeamData();
+    fetchWordPressMembers();
   }, []);
 
-  // Always render the page, even if loading
   return (
     <>
-      <AreasOfFocusHero 
-        title="Meet Our Team"
-        desc="Our dedicated team of professionals and board members work together to drive inclusive development and create positive change across Nigeria's most marginalized communities."
+      <AreasOfFocusHero
+        title="Our Team"
+        subtitle="Meet the dedicated individuals driving our mission"
         image="/img/card-img5.webp"
       />
       
@@ -257,77 +230,27 @@ const TeamPage = () => {
                 <div className="executive-director__content">
                   <div className="executive-director__photo-section">
                     <div className="executive-director__photo-container">
-                      {isFromWordPress && wpExecutiveDirector ? (
-                        // WordPress executive director - use the known working image URL
-                        <img
-                          src="https://admin.ipadev.ng/wp-content/uploads/2025/07/margaret-fagboyo.jpg"
-                          alt={typeof wpExecutiveDirector.title === 'object' && wpExecutiveDirector.title.rendered 
-                            ? wpExecutiveDirector.title.rendered 
-                            : wpExecutiveDirector.title}
-                          className="executive-director__photo"
-                          onError={(e) => {
-                            console.log('WordPress image failed to load:', e.target.src);
-                            e.target.src = '/img/placeholder-avatar.svg';
-                          }}
-                        />
-                      ) : (
-                        // Fallback image
-                        <img
-                          src={finalExecutiveDirector.photo} 
-                          alt={finalExecutiveDirector.name}
-                          className="executive-director__photo"
-                          onError={(e) => {
-                            console.log('Fallback image failed to load:', e.target.src);
-                            e.target.src = '/img/placeholder-avatar.svg';
-                          }}
-                        />
-                      )}
+                      <img 
+                        src={finalExecutiveDirector.photo} 
+                        alt={finalExecutiveDirector.name}
+                        className="executive-director__photo"
+                      />
                     </div>
                   </div>
                   <div className="executive-director__info">
-                    <h2 className="executive-director__title">
-                      {isFromWordPress && wpExecutiveDirector && wpExecutiveDirector.acf && wpExecutiveDirector.acf.role 
-                        ? (typeof wpExecutiveDirector.acf.role === 'object' && wpExecutiveDirector.acf.role.rendered 
-                            ? wpExecutiveDirector.acf.role.rendered 
-                            : wpExecutiveDirector.acf.role)
-                        : 'Executive Director'
-                      }
-                    </h2>
-                    <h3 className="executive-director__name">
-                      {isFromWordPress && wpExecutiveDirector ? 
-                        (typeof wpExecutiveDirector.title === 'object' && wpExecutiveDirector.title.rendered 
-                          ? wpExecutiveDirector.title.rendered 
-                          : wpExecutiveDirector.title) 
-                        : finalExecutiveDirector.name}
-                    </h3>
-                    
+                    <h2 className="executive-director__title">{finalExecutiveDirector.title}</h2>
+                    <h1 className="executive-director__name">{finalExecutiveDirector.name}</h1>
                     <div className="executive-director__bio">
-                      {isFromWordPress && wpExecutiveDirector ? (
-                        // WordPress content - show ACF bio if available, otherwise show content
-                        wpExecutiveDirector.acf && wpExecutiveDirector.acf.bio ? (
-                          <p>{wpExecutiveDirector.acf.bio}</p>
-                        ) : (
-                          <div dangerouslySetInnerHTML={{ __html: wpExecutiveDirector.content.rendered }} />
-                        )
-                      ) : (
-                        // Fallback bio
-                        <p>{finalExecutiveDirector.bio}</p>
-                      )}
-                    </div>
-                    
-                    {/* Vision and Message only show for fallback data */}
-                    {!isFromWordPress && finalExecutiveDirector.vision && (
+                      <p>{finalExecutiveDirector.bio}</p>
                       <div className="executive-director__vision">
-                        <h4 className="executive-director__vision-title">Vision for the Organization</h4>
-                        <p>"{finalExecutiveDirector.vision}"</p>
+                        <h3 className="executive-director__vision-title">Vision</h3>
+                        <p>{finalExecutiveDirector.vision}</p>
                       </div>
-                    )}
-                    {!isFromWordPress && finalExecutiveDirector.message && (
                       <div className="executive-director__message">
-                        <h4 className="executive-director__message-title">Message to Visitors</h4>
-                        <p>"{finalExecutiveDirector.message}"</p>
+                        <h3 className="executive-director__message-title">Message</h3>
+                        <p>{finalExecutiveDirector.message}</p>
                       </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               </section>

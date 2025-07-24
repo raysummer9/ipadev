@@ -4,7 +4,6 @@ import HeroCard from './HeroCard';
 
 const Hero = ({ onDataReady }) => {
   const [heroData, setHeroData] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchHeroData = async () => {
@@ -40,7 +39,6 @@ const Hero = ({ onDataReady }) => {
         console.error('Error fetching hero data:', err);
         // Continue with default data even if API fails
       } finally {
-        setLoading(false);
         // Notify parent component that data is ready
         if (onDataReady) {
           onDataReady();

@@ -18,9 +18,9 @@ const ContactInfoPanel = () => (
     </div>
     <div className="contact-info-panel__card contact-info-panel__card--socials">
       <div className="contact-info-panel__socials">
-        <a href="#" aria-label="Facebook"><FaFacebookF /></a>
-        <a href="#" aria-label="Twitter"><FaTwitter /></a>
-        <a href="#" aria-label="LinkedIn"><FaLinkedinIn /></a>
+        <button type="button" aria-label="Facebook"><FaFacebookF /></button>
+        <button type="button" aria-label="Twitter"><FaTwitter /></button>
+        <button type="button" aria-label="LinkedIn"><FaLinkedinIn /></button>
       </div>
       <span>Social Profiles</span>
     </div>

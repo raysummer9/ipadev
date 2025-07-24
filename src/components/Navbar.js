@@ -10,10 +10,10 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar__left">
-        <a href="/" className="navbar__logo-link" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <Link to="/" className="navbar__logo-link" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
           <img src={process.env.PUBLIC_URL + '/IPADEV-logo.png'} alt="IPADEV Logo" className="navbar__logo-img" />
           <span className="navbar__org-name">Inclusive Pathway Development Initiative (IPADEV)</span>
-        </a>
+        </Link>
       </div>
       <div className="navbar__center">
         {/* <a href="#" className="navbar__link">Our Vision</a> */}
@@ -23,10 +23,10 @@ const Navbar = () => {
       </div>
       <div className="navbar__right">
         <div className="navbar__socials">
-          <a href="#" aria-label="Twitter"><FaTwitter /></a>
-          <a href="#" aria-label="Facebook"><FaFacebookF /></a>
-          <a href="#" aria-label="YouTube"><FaYoutube /></a>
-          <a href="#" aria-label="Instagram"><FaInstagram /></a>
+          <button type="button" aria-label="Twitter"><FaTwitter /></button>
+          <button type="button" aria-label="Facebook"><FaFacebookF /></button>
+          <button type="button" aria-label="YouTube"><FaYoutube /></button>
+          <button type="button" aria-label="Instagram"><FaInstagram /></button>
         </div>
         <Link to="/contact" className="navbar__contact">Contact us <span className="arrow">→</span></Link>
         <button className="navbar__hamburger" onClick={() => setMobileMenuOpen(true)} aria-label="Open menu">
@@ -49,10 +49,10 @@ const Navbar = () => {
               Meet the Team
             </Link>
             <div className="navbar__mobile-socials">
-              <a href="#" aria-label="Twitter"><FaTwitter /></a>
-              <a href="#" aria-label="Facebook"><FaFacebookF /></a>
-              <a href="#" aria-label="YouTube"><FaYoutube /></a>
-              <a href="#" aria-label="Instagram"><FaInstagram /></a>
+              <button type="button" aria-label="Twitter"><FaTwitter /></button>
+              <button type="button" aria-label="Facebook"><FaFacebookF /></button>
+              <button type="button" aria-label="YouTube"><FaYoutube /></button>
+              <button type="button" aria-label="Instagram"><FaInstagram /></button>
             </div>
             <Link to="/contact" className="navbar__contact navbar__contact--mobile" onClick={() => setMobileMenuOpen(false)}>
               Contact us <span className="arrow">→</span>

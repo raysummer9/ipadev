@@ -20,10 +20,10 @@ const Footer = () => (
     </div>
     <div className="footer__bottom">
       <div className="footer__socials">
-        <a href="#" aria-label="Twitter"><FaTwitter /></a>
-        <a href="#" aria-label="Facebook"><FaFacebookF /></a>
-        <a href="#" aria-label="YouTube"><FaYoutube /></a>
-        <a href="#" aria-label="Instagram"><FaInstagram /></a>
+        <button type="button" aria-label="Twitter"><FaTwitter /></button>
+        <button type="button" aria-label="Facebook"><FaFacebookF /></button>
+        <button type="button" aria-label="YouTube"><FaYoutube /></button>
+        <button type="button" aria-label="Instagram"><FaInstagram /></button>
       </div>
       <div className="footer__copyright">
         © {new Date().getFullYear()} IPADEV. All rights reserved.

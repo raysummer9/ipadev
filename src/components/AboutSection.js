@@ -5,7 +5,6 @@ import './AboutSection.css';
 const AboutSection = ({ onDataReady }) => {
   const [missionVisionData, setMissionVisionData] = useState(null);
   const [coreValuesData, setCoreValuesData] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,7 +69,6 @@ const AboutSection = ({ onDataReady }) => {
         console.error('Error fetching data:', err);
         // Continue with default data even if API fails
       } finally {
-        setLoading(false);
         // Notify parent component that data is ready
         if (onDataReady) {
           onDataReady();
