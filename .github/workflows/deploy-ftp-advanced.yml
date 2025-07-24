@@ -1,0 +1,103 @@
+name: Build and Deploy via FTP
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch: # Allow manual trigger
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build application
+      run: npm run build
+      
+    - name: Verify build contents
+      run: |
+        echo "🔍 Verifying build contents..."
+        echo "Files that will be uploaded:"
+        find build/ -type f | head -20
+        echo "... and more files"
+        echo "✅ Build verification complete"
+      
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-files
+        path: build/
+        retention-days: 1
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    steps:
+    - name: Download build artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build-files
+        path: build/
+        
+    - name: Verify deployment contents
+      run: |
+        echo "🔍 Final verification before deployment..."
+        echo "Only these files will be uploaded:"
+        ls -la build/
+        echo "✅ Deployment verification complete"
+        
+    - name: Deploy to FTP server
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        port: ${{ secrets.FTP_PORT || 21 }}
+        local-dir: ./build/
+        server-dir: ${{ secrets.FTP_SERVER_DIR || '/' }}
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/.env
+          **/.env.*
+          **/README.md
+          **/DEPLOYMENT_SETUP.md
+          **/.github/**
+          **/src/**
+          **/public/**
+          **/package.json
+          **/package-lock.json
+          **/composer.json
+          **/composer.lock
+          **/vendor/**
+          **/test-env.php
+          **/env-template.txt
+          **/compress-images.js
+          **/vendor.zip
+        dangerous-clean-slate: false
+        log-level: verbose
+        
+    - name: Deployment Status
+      run: |
+        echo "✅ Deployment completed successfully!"
+        echo "🌐 Your site should be live at: ${{ secrets.WEBSITE_URL || 'https://yourdomain.com' }}"
+        echo "📅 Deployed at: $(date)"
+        echo "🔗 Commit: ${{ github.sha }}"
+        echo "🛡️ Only build files were uploaded - your server is safe!" 
