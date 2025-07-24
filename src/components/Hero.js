@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Hero.css';
 import HeroCard from './HeroCard';
 
-const Hero = () => {
+const Hero = ({ onDataReady }) => {
   const [heroData, setHeroData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -10,7 +10,16 @@ const Hero = () => {
     const fetchHeroData = async () => {
       try {
         console.log('Fetching hero data from WordPress...');
-        const response = await fetch('https://admin.ipadev.ng/wp-json/wp/v2/hero');
+        
+        // Add timeout to prevent hanging
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
+        
+        const response = await fetch('https://admin.ipadev.ng/wp-json/wp/v2/hero', {
+          signal: controller.signal
+        });
+        
+        clearTimeout(timeoutId);
         console.log('Hero response status:', response.status);
         
         if (response.ok) {
@@ -29,13 +38,18 @@ const Hero = () => {
         }
       } catch (err) {
         console.error('Error fetching hero data:', err);
+        // Continue with default data even if API fails
       } finally {
         setLoading(false);
+        // Notify parent component that data is ready
+        if (onDataReady) {
+          onDataReady();
+        }
       }
     };
 
     fetchHeroData();
-  }, []);
+  }, [onDataReady]);
 
   // Default values
   const title = heroData?.title || 'Creating Inclusive Pathways for a Just and Equitable Nigeria';

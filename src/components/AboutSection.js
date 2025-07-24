@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './AboutSection.css';
 
-const AboutSection = () => {
+const AboutSection = ({ onDataReady }) => {
   const [missionVisionData, setMissionVisionData] = useState(null);
   const [coreValuesData, setCoreValuesData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -12,7 +12,16 @@ const AboutSection = () => {
       try {
         // Fetch mission & vision data
         console.log('Fetching mission & vision data from WordPress...');
-        const missionResponse = await fetch('https://admin.ipadev.ng/wp-json/wp/v2/our_mission___vision');
+        
+        // Add timeout to prevent hanging
+        const controller1 = new AbortController();
+        const timeoutId1 = setTimeout(() => controller1.abort(), 3000); // 3 second timeout
+        
+        const missionResponse = await fetch('https://admin.ipadev.ng/wp-json/wp/v2/our_mission___vision', {
+          signal: controller1.signal
+        });
+        
+        clearTimeout(timeoutId1);
         console.log('Mission & Vision response status:', missionResponse.status);
         
         if (missionResponse.ok) {
@@ -32,7 +41,16 @@ const AboutSection = () => {
 
         // Fetch core values data from core_values custom post type
         console.log('Fetching core values data from WordPress...');
-        const coreValuesResponse = await fetch('https://admin.ipadev.ng/wp-json/wp/v2/core_values');
+        
+        // Add timeout to prevent hanging
+        const controller2 = new AbortController();
+        const timeoutId2 = setTimeout(() => controller2.abort(), 3000); // 3 second timeout
+        
+        const coreValuesResponse = await fetch('https://admin.ipadev.ng/wp-json/wp/v2/core_values', {
+          signal: controller2.signal
+        });
+        
+        clearTimeout(timeoutId2);
         console.log('Core Values response status:', coreValuesResponse.status);
         
         if (coreValuesResponse.ok) {
@@ -50,13 +68,18 @@ const AboutSection = () => {
         }
       } catch (err) {
         console.error('Error fetching data:', err);
+        // Continue with default data even if API fails
       } finally {
         setLoading(false);
+        // Notify parent component that data is ready
+        if (onDataReady) {
+          onDataReady();
+        }
       }
     };
 
     fetchData();
-  }, []);
+  }, [onDataReady]);
 
   // Default values
   const missionTitle = missionVisionData?.title || 'Our Mission & Vision';
