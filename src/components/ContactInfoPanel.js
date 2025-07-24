@@ -18,9 +18,9 @@ const ContactInfoPanel = () => (
     </div>
     <div className="contact-info-panel__card contact-info-panel__card--socials">
       <div className="contact-info-panel__socials">
-        <button type="button" aria-label="Facebook"><FaFacebookF /></button>
-        <button type="button" aria-label="Twitter"><FaTwitter /></button>
-        <button type="button" aria-label="LinkedIn"><FaLinkedinIn /></button>
+        <a href="https://facebook.com/ipadev" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a>
+        <a href="https://twitter.com/ipadev" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><FaTwitter /></a>
+        <a href="https://linkedin.com/company/ipadev" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a>
       </div>
       <span>Social Profiles</span>
     </div>

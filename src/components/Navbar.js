@@ -23,10 +23,10 @@ const Navbar = () => {
       </div>
       <div className="navbar__right">
         <div className="navbar__socials">
-          <button type="button" aria-label="Twitter"><FaTwitter /></button>
-          <button type="button" aria-label="Facebook"><FaFacebookF /></button>
-          <button type="button" aria-label="YouTube"><FaYoutube /></button>
-          <button type="button" aria-label="Instagram"><FaInstagram /></button>
+          <a href="https://twitter.com/ipadev" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><FaTwitter /></a>
+          <a href="https://facebook.com/ipadev" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a>
+          <a href="https://youtube.com/ipadev" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+          <a href="https://instagram.com/ipadev" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
         </div>
         <Link to="/contact" className="navbar__contact">Contact us <span className="arrow">→</span></Link>
         <button className="navbar__hamburger" onClick={() => setMobileMenuOpen(true)} aria-label="Open menu">
@@ -49,10 +49,10 @@ const Navbar = () => {
               Meet the Team
             </Link>
             <div className="navbar__mobile-socials">
-              <button type="button" aria-label="Twitter"><FaTwitter /></button>
-              <button type="button" aria-label="Facebook"><FaFacebookF /></button>
-              <button type="button" aria-label="YouTube"><FaYoutube /></button>
-              <button type="button" aria-label="Instagram"><FaInstagram /></button>
+              <a href="https://twitter.com/ipadev" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><FaTwitter /></a>
+              <a href="https://facebook.com/ipadev" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><FaFacebookF /></a>
+              <a href="https://youtube.com/ipadev" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><FaYoutube /></a>
+              <a href="https://instagram.com/ipadev" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><FaInstagram /></a>
             </div>
             <Link to="/contact" className="navbar__contact navbar__contact--mobile" onClick={() => setMobileMenuOpen(false)}>
               Contact us <span className="arrow">→</span>
